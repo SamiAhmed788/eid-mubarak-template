@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useSpring, animated } from 'react-spring';
 import './App.css';
 
 function App() {
+  const { opacity, y } = useSpring({
+    from: { opacity: 0, y: -50 },
+    to: { opacity: 1, y: 0 },
+    config: { duration: 1000 },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <animated.div
+        style={{
+          opacity,
+          transform: y.interpolate(y => `translateY(${y}px)`),
+        }}
+        className="greeting"
+      >
+        <h1>Eid Mubarak!</h1>
+        <h3>from sami ahmed</h3>
+        <p>May this special day bring peace, happiness, and prosperity to everyone.</p>
+      </animated.div>
     </div>
   );
 }
